@@ -1,1 +1,1 @@
-# infinity-school-repo
+# infinity-school-repo-FE/BE
