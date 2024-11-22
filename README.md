@@ -1,1 +1,1 @@
-# infinity-school
+# infinity-school-repo
