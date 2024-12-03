@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import MediaProgressbar from "../Common/MediaProgress";
 
 interface Lecture {
   id: number;
@@ -13,8 +15,9 @@ const ContentUploader: React.FC<{
   setContentData: (data: Lecture[]) => void;
 }> = ({ contentData, setContentData }) => {
   const bulkUploadInputRef = useRef<HTMLInputElement | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<Record<number, number>>({});
+  const [mediaUploading, setMediaUploading] = useState(false);
 
-  // Ensure one lecture input box is displayed by default
   useEffect(() => {
     if (contentData.length === 0) {
       setContentData([
@@ -53,40 +56,65 @@ const ContentUploader: React.FC<{
     setContentData(updatedLectures);
   };
 
-  const handleFileUpload = async (id: number, file: File | null) => {
+  const handleFileUpload = (id: number, file: File | null) => {
     if (!file) return;
 
     const formData = new FormData();
     formData.append("file", file);
 
-    try {
-      const response = await fetch("http://localhost:3000/media/upload", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: formData,
-      });
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:3000/media/upload");
 
-      const data = await response.json();
+    xhr.setRequestHeader(
+      "Authorization",
+      `Bearer ${localStorage.getItem("accessToken")}`
+    );
 
-      if (data.success) {
-        const updatedLectures = contentData.map((lecture) =>
-          lecture.id === id
-            ? {
-                ...lecture,
-                videoUrl: data.data.url,
-                public_id: data.data.public_id,
-              }
-            : lecture
-        );
-        setContentData(updatedLectures);
-      } else {
-        console.error("Error uploading file:", data.message);
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const progress = Math.round((event.loaded / event.total) * 100);
+        setUploadProgress((prev) => ({ ...prev, [id]: progress }));
       }
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
+    };
+
+    xhr.onloadstart = () => {
+      setMediaUploading(true);
+    };
+
+    xhr.onloadend = () => {
+      setMediaUploading(false);
+    };
+
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          setUploadProgress((prev) => ({ ...prev, [id]: 100 }));
+
+          const updatedLectures = contentData.map((lecture) =>
+            lecture.id === id
+              ? {
+                  ...lecture,
+                  videoUrl: response.data.url,
+                  public_id: response.data.public_id,
+                }
+              : lecture
+          );
+          setContentData(updatedLectures);
+        } else {
+          console.error("Error uploading file:", response.message);
+        }
+      } else {
+        console.error("Error uploading file");
+      }
+    };
+
+    xhr.onerror = () => {
+      console.error("Upload failed");
+      setUploadProgress((prev) => ({ ...prev, [id]: 0 }));
+    };
+
+    xhr.send(formData);
   };
 
   const handleDeleteLecture = (id: number) => {
@@ -96,7 +124,6 @@ const ContentUploader: React.FC<{
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8 mt-10">
-      {/* Add and Bulk Upload Controls */}
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={handleAddLecture}
@@ -125,7 +152,6 @@ const ContentUploader: React.FC<{
         </button>
       </div>
 
-      {/* Lectures List */}
       {contentData.map((lecture) => (
         <div
           key={lecture.id}
@@ -138,7 +164,11 @@ const ContentUploader: React.FC<{
                 type="checkbox"
                 checked={lecture.isFreePreview}
                 onChange={(e) =>
-                  handleInputChange(lecture.id, "isFreePreview", e.target.checked)
+                  handleInputChange(
+                    lecture.id,
+                    "isFreePreview",
+                    e.target.checked
+                  )
                 }
                 className="form-checkbox h-5 w-5 text-orange-500"
               />
@@ -158,11 +188,12 @@ const ContentUploader: React.FC<{
 
           {lecture.videoUrl ? (
             <div className="flex items-center space-x-4">
-              <video
-                src={lecture.videoUrl}
+              <ReactPlayer
+                url={lecture.videoUrl}
                 controls
-                className="w-64 h-36 rounded-md"
-              ></video>
+                width="300px"
+                height="200px"
+              />
               <button
                 onClick={() => handleDeleteLecture(lecture.id)}
                 className="px-4 py-2 bg-red-500 text-white rounded-lg"
@@ -171,14 +202,23 @@ const ContentUploader: React.FC<{
               </button>
             </div>
           ) : (
-            <input
-              type="file"
-              accept="video/*"
-              onChange={(e) =>
-                e.target.files && handleFileUpload(lecture.id, e.target.files[0])
-              }
-              className="bg-gray-900 text-white file:bg-gray-700 file:text-white file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500"
-            />
+            <div>
+              <input
+                type="file"
+                accept="video/*"
+                onChange={(e) =>
+                  e.target.files &&
+                  handleFileUpload(lecture.id, e.target.files[0])
+                }
+                className="bg-gray-900 text-white file:bg-gray-700 file:text-white file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
+              />
+              {uploadProgress[lecture.id] !== undefined && (
+                <MediaProgressbar
+                  isMediaUploading={mediaUploading}
+                  progress={uploadProgress[lecture.id]}
+                />
+              )}
+            </div>
           )}
         </div>
       ))}
