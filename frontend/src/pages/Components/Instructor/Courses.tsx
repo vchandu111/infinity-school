@@ -1,28 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
+interface Course {
+  _id: string;
+  title: string;
+  students: { studentName: string }[]; // Adjusted based on API response
+  pricing: number;
+  revenue?: string; // You can calculate revenue based on pricing and student count
+}
+
 const Courses: React.FC = () => {
-  // Dummy data for courses
-  const courses = [
-    {
-      id: 1,
-      title: "React JS Full Course 2025",
-      students: 100,
-      revenue: "$5000",
-    },
-    {
-      id: 2,
-      title: "Node.js Mastery",
-      students: 75,
-      revenue: "$4000",
-    },
-    {
-      id: 3,
-      title: "Mastering TypeScript",
-      students: 120,
-      revenue: "$6000",
-    },
-  ];
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/instructor/course/get");
+        const data = await response.json();
+
+        if (data.success) {
+          setCourses(
+            data.data.map((course: any) => ({
+              ...course,
+              revenue: `$${course.students.length * course.pricing}`, // Calculate revenue
+            }))
+          );
+        } else {
+          setError("Failed to fetch courses");
+        }
+      } catch (err) {
+        console.error(err);
+        setError("An error occurred while fetching courses");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  console.log(courses)
+
+  if (loading) {
+    return (
+      <div className="p-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-4">All Courses</h1>
+        <p>Loading courses...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-4">All Courses</h1>
+        <p className="text-red-400">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white rounded-lg shadow-lg">
@@ -53,12 +90,12 @@ const Courses: React.FC = () => {
           </thead>
           <tbody>
             {courses.map((course) => (
-              <tr key={course.id} className="hover:bg-gray-700 transition" >
-                <td  className="py-5 px-6 text-sm font-medium text-gray-300 border-b border-gray-700">
+              <tr key={course._id} className="hover:bg-gray-700 transition">
+                <td className="py-5 px-6 text-sm font-medium text-gray-300 border-b border-gray-700">
                   {course.title}
                 </td>
                 <td className="py-3 px-6 text-sm text-gray-300 border-b border-gray-700">
-                  {course.students}
+                  {course.students.length}
                 </td>
                 <td className="py-3 px-6 text-sm text-gray-300 border-b border-gray-700">
                   {course.revenue}

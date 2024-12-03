@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 interface Lecture {
   id: number;
@@ -13,6 +13,21 @@ const ContentUploader: React.FC<{
   setContentData: (data: Lecture[]) => void;
 }> = ({ contentData, setContentData }) => {
   const bulkUploadInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Ensure one lecture input box is displayed by default
+  useEffect(() => {
+    if (contentData.length === 0) {
+      setContentData([
+        {
+          id: 1,
+          title: "",
+          videoUrl: null,
+          public_id: null,
+          isFreePreview: false,
+        },
+      ]);
+    }
+  }, [contentData, setContentData]);
 
   const handleAddLecture = () => {
     setContentData([
