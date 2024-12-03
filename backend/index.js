@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const jobRoutes = require("./routes/jobRoutes");
 const authRoutes = require("../backend/routes/auth-routes/index")
+const mediaRoutes = require('./routes/instructor-routes/media-routes')
+const instructorCourseRoutes = require('./routes/instructor-routes/course-routes')
 const app = express();
 const cors = require("cors");
 // Middleware
@@ -14,8 +15,10 @@ app.use(
   })
 );
 // API Routes
-app.use("/", jobRoutes);
 app.use("/auth", authRoutes);
+app.use('/media',mediaRoutes)
+app.use("/instructor/course", instructorCourseRoutes);
+
 
 // Connect to MongoDB
 mongoose

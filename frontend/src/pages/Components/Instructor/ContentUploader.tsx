@@ -1,33 +1,41 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 interface Lecture {
   id: number;
   title: string;
-  file: File | null;
+  videoUrl: string | null;
+  public_id: string | null;
   isFreePreview: boolean;
 }
 
-const ContentUploader: React.FC = () => {
-  const [lectures, setLectures] = useState<Lecture[]>([
-    { id: 1, title: "", file: null, isFreePreview: false },
-  ]);
+const ContentUploader: React.FC<{
+  contentData: Lecture[];
+  setContentData: (data: Lecture[]) => void;
+}> = ({ contentData, setContentData }) => {
+  const bulkUploadInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleAddLecture = () => {
-    setLectures([
-      ...lectures,
-      { id: lectures.length + 1, title: "", file: null, isFreePreview: false },
+    setContentData([
+      ...contentData,
+      {
+        id: contentData.length + 1,
+        title: "",
+        videoUrl: null,
+        public_id: null,
+        isFreePreview: false,
+      },
     ]);
   };
 
   const handleInputChange = (
     id: number,
     field: keyof Lecture,
-    value: string | File | boolean
+    value: string | boolean
   ) => {
-    const updatedLectures = lectures.map((lecture) =>
+    const updatedLectures = contentData.map((lecture) =>
       lecture.id === id ? { ...lecture, [field]: value } : lecture
     );
-    setLectures(updatedLectures);
+    setContentData(updatedLectures);
   };
 
   const handleFileUpload = async (id: number, file: File | null) => {
@@ -37,24 +45,27 @@ const ContentUploader: React.FC = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch(
-        "http://localhost:3000/instructor-routes/media-routes/upload",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-          body: formData,
-        }
-      );
+      const response = await fetch("http://localhost:3000/media/upload", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: formData,
+      });
 
       const data = await response.json();
 
       if (data.success) {
-        console.log("File uploaded successfully:", data.data.url);
-
-        // Update lecture with uploaded file URL
-        handleInputChange(id, "file", data.data.url);
+        const updatedLectures = contentData.map((lecture) =>
+          lecture.id === id
+            ? {
+                ...lecture,
+                videoUrl: data.data.url,
+                public_id: data.data.public_id,
+              }
+            : lecture
+        );
+        setContentData(updatedLectures);
       } else {
         console.error("Error uploading file:", data.message);
       }
@@ -63,16 +74,44 @@ const ContentUploader: React.FC = () => {
     }
   };
 
+  const handleDeleteLecture = (id: number) => {
+    const updatedLectures = contentData.filter((lecture) => lecture.id !== id);
+    setContentData(updatedLectures);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8 mt-10">
-      <button
-        onClick={handleAddLecture}
-        className="mb-6 px-6 py-2 bg-teal-700 hover:bg-teal-600 text-white rounded-lg font-medium transition"
-      >
-        Add Lecture
-      </button>
+      {/* Add and Bulk Upload Controls */}
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={handleAddLecture}
+          className="px-6 py-2 bg-teal-700 hover:bg-teal-600 text-white rounded-lg font-medium transition"
+        >
+          Add Lecture
+        </button>
+        <input
+          type="file"
+          multiple
+          ref={bulkUploadInputRef}
+          onChange={(e) => {
+            if (e.target.files) {
+              Array.from(e.target.files).forEach((file, index) => {
+                handleFileUpload(contentData.length + index + 1, file);
+              });
+            }
+          }}
+          className="hidden"
+        />
+        <button
+          onClick={() => bulkUploadInputRef.current?.click()}
+          className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition"
+        >
+          Bulk Upload
+        </button>
+      </div>
 
-      {lectures.map((lecture) => (
+      {/* Lectures List */}
+      {contentData.map((lecture) => (
         <div
           key={lecture.id}
           className="bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4"
@@ -84,11 +123,7 @@ const ContentUploader: React.FC = () => {
                 type="checkbox"
                 checked={lecture.isFreePreview}
                 onChange={(e) =>
-                  handleInputChange(
-                    lecture.id,
-                    "isFreePreview",
-                    e.target.checked
-                  )
+                  handleInputChange(lecture.id, "isFreePreview", e.target.checked)
                 }
                 className="form-checkbox h-5 w-5 text-orange-500"
               />
@@ -106,17 +141,30 @@ const ContentUploader: React.FC = () => {
             className="block w-full bg-gray-900 text-white placeholder-gray-500 border border-gray-700 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
 
-          <div className="flex items-center">
+          {lecture.videoUrl ? (
+            <div className="flex items-center space-x-4">
+              <video
+                src={lecture.videoUrl}
+                controls
+                className="w-64 h-36 rounded-md"
+              ></video>
+              <button
+                onClick={() => handleDeleteLecture(lecture.id)}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg"
+              >
+                Delete Lecture
+              </button>
+            </div>
+          ) : (
             <input
               type="file"
               accept="video/*"
               onChange={(e) =>
-                e.target.files &&
-                handleFileUpload(lecture.id, e.target.files[0])
+                e.target.files && handleFileUpload(lecture.id, e.target.files[0])
               }
               className="bg-gray-900 text-white file:bg-gray-700 file:text-white file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
-          </div>
+          )}
         </div>
       ))}
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface Field {
   name: string;
@@ -9,12 +9,14 @@ interface Field {
   options?: string[];
 }
 
-const LandingPageData: React.FC = () => {
+const LandingPageData: React.FC<{
+  landingPageData: Record<string, string>;
+  setLandingPageData: (data: Record<string, string>) => void;
+}> = ({ landingPageData, setLandingPageData }) => {
   const courseCategories = ["Technology", "Business", "Health"];
   const courseLevelOptions = ["Beginner", "Intermediate", "Advanced"];
   const languageOptions = ["English", "Spanish", "French"];
 
-  // Dynamic fields for the form
   const fields: Field[] = [
     {
       name: "title",
@@ -75,46 +77,33 @@ const LandingPageData: React.FC = () => {
     },
   ];
 
-  // Form state
-  const [formData, setFormData] = useState<Record<string, string>>(
-    fields.reduce((acc, field) => {
-      acc[field.name] = "";
-      return acc;
-    }, {} as Record<string, string>)
-  );
-
-  // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form Data:", formData);
-    // Perform any API submission logic here
+    setLandingPageData({ ...landingPageData, [name]: value });
   };
 
   return (
     <div className="p-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen mt-10">
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form className="space-y-6">
         {fields.map((field) => (
           <div key={field.name} className="flex flex-col">
-            <label htmlFor={field.name} className="text-sm font-medium mb-1">
+            <label
+              htmlFor={field.name}
+              className="text-sm font-medium mb-2 text-gray-300"
+            >
               {field.label}
             </label>
             {field.componentType === "input" && (
               <input
                 id={field.name}
-                name={field.name}
                 type={field.type}
+                name={field.name}
                 placeholder={field.placeholder}
-                value={formData[field.name]}
+                value={landingPageData[field.name] || ""}
                 onChange={handleChange}
                 className="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
@@ -124,17 +113,17 @@ const LandingPageData: React.FC = () => {
                 id={field.name}
                 name={field.name}
                 placeholder={field.placeholder}
-                value={formData[field.name]}
+                value={landingPageData[field.name] || ""}
                 onChange={handleChange}
                 rows={4}
                 className="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
+              ></textarea>
             )}
             {field.componentType === "select" && (
               <select
                 id={field.name}
                 name={field.name}
-                value={formData[field.name]}
+                value={landingPageData[field.name] || ""}
                 onChange={handleChange}
                 className="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
               >
@@ -150,12 +139,6 @@ const LandingPageData: React.FC = () => {
             )}
           </div>
         ))}
-        <button
-          type="submit"
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg font-medium transition"
-        >
-          Submit
-        </button>
       </form>
     </div>
   );

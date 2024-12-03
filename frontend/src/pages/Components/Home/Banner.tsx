@@ -2,9 +2,20 @@ import React from "react";
 
 const Banner: React.FC = () => {
   return (
-    <div className="relative bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen flex items-center justify-center">
+    <div
+      className="relative bg-gradient-to-b from-gray-900 to-gray-800 text-white min-h-screen flex items-center justify-center"
+      style={{
+        backgroundImage: `url('https://miro.medium.com/v2/resize:fit:1400/1*hRNYFuVLN7UfeR2uM43RrA.jpeg')`, // Update this path to your image location
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-gray-900/80"></div>
+
       {/* Banner Content */}
-      <div className="max-w-4xl mx-auto text-center px-6">
+      <div className="relative max-w-4xl mx-auto text-center px-6">
         <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-4">
           Take the First Step <br /> to Learn With Us
         </h1>
@@ -27,9 +38,6 @@ const Banner: React.FC = () => {
           </a>
         </div>
       </div>
-
-      {/* Wave Effect */}
-      
     </div>
   );
 };
