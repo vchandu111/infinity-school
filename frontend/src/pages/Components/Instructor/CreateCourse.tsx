@@ -3,10 +3,41 @@ import LandingPageData from "./LandingPage";
 import Settings from "./Settings";
 import ContentUploader from "./ContentUploader";
 
+// Define types for course data
+interface LandingPageData {
+  title: string;
+  category: string;
+  level: string;
+  primaryLanguage: string;
+  subtitle: string;
+  description: string;
+  pricing: number;
+  objectives: string;
+  welcomeMessage: string;
+}
+
+interface SettingsData {
+  courseImage: string | null;
+}
+
+interface Lecture {
+  id: number;
+  title: string;
+  videoUrl: string | null;
+  public_id: string | null;
+  isFreePreview: boolean;
+}
+
+interface CourseData {
+  settings: SettingsData;
+  landingPage: Partial<LandingPageData>; // Allow fields to be optional during editing
+  content: Lecture[];
+}
+
 const CreateCourse: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("Content Uploader");
 
-  const [courseData, setCourseData] = useState({
+  const [courseData, setCourseData] = useState<CourseData>({
     settings: { courseImage: null },
     landingPage: {},
     content: [],
@@ -15,9 +46,9 @@ const CreateCourse: React.FC = () => {
   // Check if all required data is filled before submitting
   const isCourseReady = Boolean(
     courseData.settings.courseImage &&
-    courseData.landingPage.title &&
-    courseData.landingPage.category &&
-    courseData.content.length > 0
+      courseData.landingPage.title &&
+      courseData.landingPage.category &&
+      courseData.content.length > 0
   );
 
   const handleSubmit = async () => {
@@ -27,18 +58,21 @@ const CreateCourse: React.FC = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/instructor/course/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify({
-          ...courseData.landingPage,
-          curriculum: courseData.content,
-          image: courseData.settings.courseImage,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:3000/instructor/course/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify({
+            ...courseData.landingPage,
+            curriculum: courseData.content,
+            image: courseData.settings.courseImage,
+          }),
+        }
+      );
 
       const result = await response.json();
 
@@ -65,7 +99,9 @@ const CreateCourse: React.FC = () => {
         <button
           onClick={handleSubmit}
           className={`px-6 py-2 text-white rounded-lg font-medium transition ${
-            isCourseReady ? "bg-orange-500 hover:bg-orange-600" : "bg-gray-500 cursor-not-allowed"
+            isCourseReady
+              ? "bg-orange-500 hover:bg-orange-600"
+              : "bg-gray-500 cursor-not-allowed"
           }`}
           disabled={!isCourseReady}
         >
@@ -95,15 +131,15 @@ const CreateCourse: React.FC = () => {
         {selectedTab === "Content Uploader" && (
           <ContentUploader
             contentData={courseData.content}
-            setContentData={(content: any) =>
+            setContentData={(content: Lecture[]) =>
               setCourseData((prev) => ({ ...prev, content }))
             }
           />
         )}
         {selectedTab === "Landing Page Data" && (
           <LandingPageData
-            landingPageData={courseData.landingPage}
-            setLandingPageData={(landingPage: any) =>
+            landingPageData={courseData.landingPage as Record<string, any>} // Adjust type for props
+            setLandingPageData={(landingPage: Partial<LandingPageData>) =>
               setCourseData((prev) => ({ ...prev, landingPage }))
             }
           />
@@ -111,7 +147,7 @@ const CreateCourse: React.FC = () => {
         {selectedTab === "Settings" && (
           <Settings
             settingsData={courseData.settings}
-            setSettingsData={(settings: any) =>
+            setSettingsData={(settings: SettingsData) =>
               setCourseData((prev) => ({ ...prev, settings }))
             }
           />
