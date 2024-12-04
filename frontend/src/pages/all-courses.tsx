@@ -1,5 +1,13 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { FaChalkboardTeacher, FaPlayCircle, FaClock, FaUser, FaFilter } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaPlayCircle,
+  FaClock,
+  FaUser,
+  FaFilter,
+  FaSearch,
+} from "react-icons/fa";
 
 interface Course {
   _id: string;
@@ -18,6 +26,7 @@ interface Course {
 const AllCourses: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
@@ -32,29 +41,41 @@ const AllCourses: React.FC = () => {
 
   // Price Range
   const [minPrice, setMinPrice] = useState<number>(0);
-  const [maxPrice, setMaxPrice] = useState<number>(500); // Adjust based on your pricing range
+  const [maxPrice, setMaxPrice] = useState<number>(500);
   const [selectedPrice, setSelectedPrice] = useState<number>(500);
+  const router = useRouter();
 
+  const handleViewDetails = (id: string) => {
+    router.push(`/all-courses/${id}`); // Navigate to the details page
+  };
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("http://localhost:3000/instructor/course/get");
+        const response = await fetch(
+          "http://localhost:3000/instructor/course/get"
+        );
         const data = await response.json();
 
         if (data.success) {
           setCourses(data.data);
           setFilteredCourses(data.data);
 
-          // Extract unique filter values
-          const uniqueCategories = [...new Set(data.data.map((course: Course) => course.category))] as string[];
-        const uniqueLevels = [...new Set(data.data.map((course: Course) => course.level))] as string[];
-        const uniqueLanguages = [...new Set(data.data.map((course: Course) => course.primaryLanguage))] as string[];
+          const uniqueCategories = [
+            ...new Set(data.data.map((course: Course) => course.category)),
+          ] as string[];
+          const uniqueLevels = [
+            ...new Set(data.data.map((course: Course) => course.level)),
+          ] as string[];
+          const uniqueLanguages = [
+            ...new Set(
+              data.data.map((course: Course) => course.primaryLanguage)
+            ),
+          ] as string[];
 
           setCategories(uniqueCategories);
           setLevels(uniqueLevels);
           setLanguages(uniqueLanguages);
 
-          // Determine min and max pricing
           const prices = data.data.map((course: Course) => course.pricing);
           setMinPrice(Math.min(...prices));
           setMaxPrice(Math.max(...prices));
@@ -104,23 +125,42 @@ const AllCourses: React.FC = () => {
   useEffect(() => {
     let filtered = courses;
 
+    // Filter by search query
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((course) =>
+        course.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Filter by other filters
     if (selectedCategories.length > 0) {
-      filtered = filtered.filter((course) => selectedCategories.includes(course.category));
+      filtered = filtered.filter((course) =>
+        selectedCategories.includes(course.category)
+      );
     }
 
     if (selectedLevels.length > 0) {
-      filtered = filtered.filter((course) => selectedLevels.includes(course.level));
+      filtered = filtered.filter((course) =>
+        selectedLevels.includes(course.level)
+      );
     }
 
     if (selectedLanguages.length > 0) {
-      filtered = filtered.filter((course) => selectedLanguages.includes(course.primaryLanguage));
+      filtered = filtered.filter((course) =>
+        selectedLanguages.includes(course.primaryLanguage)
+      );
     }
 
-    // Apply price range filter
     filtered = filtered.filter((course) => course.pricing <= selectedPrice);
 
     setFilteredCourses(filtered);
-  }, [selectedCategories, selectedLevels, selectedLanguages, selectedPrice]);
+  }, [
+    searchQuery,
+    selectedCategories,
+    selectedLevels,
+    selectedLanguages,
+    selectedPrice,
+  ]);
 
   if (loading) {
     return (
@@ -147,13 +187,15 @@ const AllCourses: React.FC = () => {
         } transition-transform duration-300 ease-in-out sm:relative sm:translate-x-0`}
       >
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-6 text-orange-500 border-b border-gray-700 pb-2 ">
+          <h2 className="text-xl font-bold mb-6 text-orange-500 border-b border-gray-700 pb-2">
             Filters
           </h2>
 
           {/* Filter by Category */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 text-gray-300">Category</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">
+              Category
+            </h3>
             {categories.map((category) => (
               <div key={category} className="flex items-center mb-3">
                 <input
@@ -197,7 +239,9 @@ const AllCourses: React.FC = () => {
 
           {/* Filter by Language */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-4 text-gray-300">Language</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">
+              Language
+            </h3>
             {languages.map((language) => (
               <div key={language} className="flex items-center mb-3">
                 <input
@@ -219,7 +263,9 @@ const AllCourses: React.FC = () => {
 
           {/* Filter by Price */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-gray-300">Price Range</h3>
+            <h3 className="text-lg font-semibold mb-4 text-gray-300">
+              Price Range
+            </h3>
             <input
               type="range"
               min={minPrice}
@@ -244,16 +290,38 @@ const AllCourses: React.FC = () => {
         <FaFilter size={20} />
       </button>
 
-      {/* Courses Grid */}
-      <div className="flex-1 ml-0 sm:ml-6">
-        <h1 className="text-3xl font-bold text-center mb-8 mt-28 md:mt-0">All Courses</h1>
+      {/* Main Content */}
+      <div className="flex-1 ml-0 sm:ml-6 mt-16">
+        {/* Search Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
+          {/* Results Count */}
+          <div className="text-gray-300 text-lg sm:text-lg mb-4 sm:mb-0">
+            {filteredCourses.length} results for{" "}
+            <span className="text-orange-500 font-semibold">
+              {searchQuery ? `“${searchQuery}”` : "all courses"}
+            </span>
+          </div>
+
+          {/* Search Bar */}
+          <div className="relative w-full sm:w-1/2">
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search courses by name..."
+              className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Courses Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCourses.map((course) => (
             <div
               key={course._id}
               className="bg-gray-800 rounded-lg shadow-2xl overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col justify-between"
             >
-              {/* Course Image */}
               <div>
                 <img
                   src={course.image}
@@ -261,19 +329,17 @@ const AllCourses: React.FC = () => {
                   className="w-full h-40 object-cover"
                 />
               </div>
-
-              {/* Course Details */}
               <div className="p-4 flex flex-col justify-between flex-1">
                 <h2 className="text-lg font-semibold">{course.title}</h2>
                 <div className="flex items-center space-x-2 mt-2">
                   <FaUser className="text-gray-400" />
-                  <p className="text-sm text-gray-400">{course.instructorName}</p>
+                  <p className="text-sm text-gray-400">
+                    {course.instructorName}
+                  </p>
                 </div>
-
                 <div className="text-lg font-semibold text-orange-500 mt-2">
                   ${course.pricing}
                 </div>
-
                 <div className="mt-4 flex justify-between items-center text-sm text-gray-400 border-t border-gray-700 pt-2">
                   <div className="flex items-center space-x-2">
                     <FaChalkboardTeacher className="text-orange-500" />
@@ -289,10 +355,11 @@ const AllCourses: React.FC = () => {
                   </div>
                 </div>
               </div>
-
-              {/* View Details Button */}
               <div className="p-4">
-                <button className="w-full bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium py-2 rounded-lg">
+                <button
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium py-2 rounded-lg"
+                  onClick={() => handleViewDetails(course._id)} // Pass the course ID
+                >
                   View Details
                 </button>
               </div>

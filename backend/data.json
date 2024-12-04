@@ -6,11 +6,11 @@
         "level": "Beginner",
         "primaryLanguage": "English",
         "subtitle": "Learn the basics of web development",
-        "description": "A comprehensive beginner course to learn the fundamentals of full stack development.",
-        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "description": "The Full Stack Development Bootcamp is a comprehensive and hands-on course designed to equip you with the essential skills and knowledge required to become a professional full-stack developer. In this course, you will start with the very basics of web development and progress to building robust, full-fledged web applications. Whether you're a complete beginner with no prior programming experience or someone looking to upgrade their development skills, this course has something for everyone.\n\nYou will learn how to design and develop both the front-end and back-end of web applications. Starting with HTML and CSS for structuring and styling web pages, you'll move on to mastering JavaScript, which is the backbone of interactive web applications. By building projects, you will understand core programming concepts such as variables, loops, conditionals, and functions. On the front-end, you'll dive into modern JavaScript frameworks like React to build dynamic user interfaces.\n\nFor the back-end, you'll learn server-side programming with Node.js and Express, enabling you to build RESTful APIs to handle client requests and interact with databases. You will also explore database design and management using MongoDB, learning how to store and retrieve data efficiently. Security best practices, such as authentication and data validation, will also be covered to ensure your applications are robust and secure.\n\nThis course adopts a project-based learning approach, providing you with real-world scenarios and challenges that mirror industry practices. By the end of this course, you will have built multiple portfolio-worthy projects that demonstrate your expertise in full-stack development, making you job-ready.\n\nWhat sets this bootcamp apart is its structured curriculum, expert mentorship, and emphasis on hands-on practice. You will have access to a supportive community of learners and instructors to guide you throughout your journey. The course also includes quizzes, coding exercises, and capstone projects to reinforce your learning and test your skills. With lifetime access to the course materials, you can revisit the content anytime to refresh your knowledge or learn something new.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxuytfjzubck8m.webp",
         "welcomeMessage": "Welcome to the Full Stack Development Bootcamp!",
         "pricing": 200,
-        "objectives": "Build dynamic web applications with JavaScript.",
+        "objectives": "In this bootcamp, you will gain a deep understanding of full-stack web development by mastering the following key areas:\n- Build responsive user interfaces using HTML, CSS, and JavaScript.\n- Develop dynamic front-end applications with React.\n- Create secure back-end services using Node.js and Express.\n- Design and manage databases with MongoDB.\n- Implement user authentication and authorization for web applications.\n- Work on real-world projects to solidify your full-stack development skills.\n- Build a strong portfolio of projects to showcase your expertise to employers.\n- Gain hands-on experience with RESTful API development and integration.\n- Learn industry best practices for scalable and maintainable code.",
         "curriculum": [
             {
                 "title": "Introduction to HTML",
@@ -23,7 +23,7 @@
         "__v": 0,
         "revenue": "$0",
         "instructorName": "John Doe"
-    },
+    },    
     {
         "_id": "674ee56e2b93b83f879600f6",
         "title": "Frontend Development with React",
