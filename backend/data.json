@@ -1,0 +1,346 @@
+[
+    {
+        "_id": "674ee4382b93b83f879600f3",
+        "title": "Full Stack Development Bootcamp",
+        "category": "Technology",
+        "level": "Beginner",
+        "primaryLanguage": "English",
+        "subtitle": "Learn the basics of web development",
+        "description": "A comprehensive beginner course to learn the fundamentals of full stack development.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Full Stack Development Bootcamp!",
+        "pricing": 200,
+        "objectives": "Build dynamic web applications with JavaScript.",
+        "curriculum": [
+            {
+                "title": "Introduction to HTML",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
+                "public_id": "yyrsqwfxuytfjzubck8m",
+                "_id": "674ee4382b93b83f879600f4"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "John Doe"
+    },
+    {
+        "_id": "674ee56e2b93b83f879600f6",
+        "title": "Frontend Development with React",
+        "category": "Technology",
+        "level": "Intermediate",
+        "primaryLanguage": "English",
+        "subtitle": "Master modern frontend development with React",
+        "description": "Dive into React and learn how to build interactive user interfaces.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the React Frontend Development Course!",
+        "pricing": 150,
+        "objectives": "Build scalable frontend applications using React.",
+        "curriculum": [
+            {
+                "title": "Getting Started with React",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
+                "public_id": "yyrsqwfxuytfjzubck8m",
+                "_id": "674ee56e2b93b83f879600f7"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Jane Smith"
+    },
+    {
+        "_id": "674ee8502b93b83f879600f9",
+        "title": "Backend Development with Node.js",
+        "category": "Technology",
+        "level": "Advanced",
+        "primaryLanguage": "English",
+        "subtitle": "Build server-side applications with Node.js",
+        "description": "Learn how to create robust backend services using Node.js.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Node.js Backend Development Course!",
+        "pricing": 250,
+        "objectives": "Develop backend services and REST APIs with Node.js.",
+        "curriculum": [
+            {
+                "title": "Node.js Basics",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
+                "public_id": "yyrsqwfxuytfjzubck8m",
+                "_id": "674ee8502b93b83f879600fa"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Mark Lee"
+    },
+    {
+        "_id": "674f9d1e065060a46096c9d1",
+        "title": "Introduction to Generative AI",
+        "category": "Technology",
+        "level": "Beginner",
+        "primaryLanguage": "English",
+        "subtitle": "Understand and build generative AI models",
+        "description": "A beginner-friendly course to explore the basics of Generative AI and its applications.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Generative AI Course!",
+        "pricing": 300,
+        "objectives": "Create basic generative AI models using Python.",
+        "curriculum": [
+            {
+                "title": "What is Generative AI?",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
+                "public_id": "yyrsqwfxuytfjzubck8m",
+                "_id": "674f9d1e065060a46096c9d2"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Sophia Green"
+    },{
+        "_id": "674ff0012b93b83f87960101",
+        "title": "DevOps Essentials",
+        "category": "Technology",
+        "level": "Intermediate",
+        "primaryLanguage": "English",
+        "subtitle": "Learn the foundations of DevOps",
+        "description": "A hands-on course to understand and implement DevOps practices.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the DevOps Essentials Course!",
+        "pricing": 200,
+        "objectives": "Implement CI/CD pipelines and monitor applications effectively.",
+        "curriculum": [
+            {
+                "title": "Introduction to DevOps",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/devops_intro.mp4",
+                "public_id": "devops_intro",
+                "_id": "674ff0012b93b83f87960102"
+            },
+            {
+                "title": "Version Control with Git",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/git_version_control.mp4",
+                "public_id": "git_version_control",
+                "_id": "674ff0012b93b83f87960103"
+            },
+            {
+                "title": "Continuous Integration (CI)",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/ci_pipelines.mp4",
+                "public_id": "ci_pipelines",
+                "_id": "674ff0012b93b83f87960104"
+            },
+            {
+                "title": "Continuous Delivery (CD)",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cd_pipelines.mp4",
+                "public_id": "cd_pipelines",
+                "_id": "674ff0012b93b83f87960105"
+            },
+            {
+                "title": "Monitoring and Logging",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/logging_monitoring.mp4",
+                "public_id": "logging_monitoring",
+                "_id": "674ff0012b93b83f87960106"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Emily White"
+    },
+    {
+        "_id": "674ff0102b93b83f87960107",
+        "title": "Cloud Computing with AWS",
+        "category": "Technology",
+        "level": "Advanced",
+        "primaryLanguage": "English",
+        "subtitle": "Master AWS cloud services",
+        "description": "Learn how to design and deploy applications on AWS cloud.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Cloud Computing with AWS Course!",
+        "pricing": 250,
+        "objectives": "Deploy and manage scalable cloud applications using AWS.",
+        "curriculum": [
+            {
+                "title": "Introduction to Cloud Computing",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cloud_intro.mp4",
+                "public_id": "cloud_intro",
+                "_id": "674ff0102b93b83f87960108"
+            },
+            {
+                "title": "AWS EC2 Basics",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_ec2_basics.mp4",
+                "public_id": "aws_ec2_basics",
+                "_id": "674ff0102b93b83f87960109"
+            },
+            {
+                "title": "AWS S3 for Storage",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_s3_storage.mp4",
+                "public_id": "aws_s3_storage",
+                "_id": "674ff0102b93b83f87960110"
+            },
+            {
+                "title": "Elastic Load Balancing",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_elb.mp4",
+                "public_id": "aws_elb",
+                "_id": "674ff0102b93b83f87960111"
+            },
+            {
+                "title": "AWS Lambda Functions",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_lambda.mp4",
+                "public_id": "aws_lambda",
+                "_id": "674ff0102b93b83f87960112"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Michael Brown"
+    },
+    {
+        "_id": "674ff0202b93b83f87960113",
+        "title": "Agile Project Management",
+        "category": "Business",
+        "level": "Beginner",
+        "primaryLanguage": "English",
+        "subtitle": "A practical guide to Agile methodologies",
+        "description": "Understand and implement Agile practices for project management.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Agile Project Management Course!",
+        "pricing": 180,
+        "objectives": "Manage projects using Agile frameworks like Scrum and Kanban.",
+        "curriculum": [
+            {
+                "title": "Introduction to Agile",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/agile_intro.mp4",
+                "public_id": "agile_intro",
+                "_id": "674ff0202b93b83f87960114"
+            },
+            {
+                "title": "Scrum Basics",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/scrum_basics.mp4",
+                "public_id": "scrum_basics",
+                "_id": "674ff0202b93b83f87960115"
+            },
+            {
+                "title": "Kanban for Workflow",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/kanban_workflow.mp4",
+                "public_id": "kanban_workflow",
+                "_id": "674ff0202b93b83f87960116"
+            },
+            {
+                "title": "Agile Planning and Estimation",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/agile_planning.mp4",
+                "public_id": "agile_planning",
+                "_id": "674ff0202b93b83f87960117"
+            },
+            {
+                "title": "Agile Tools Overview",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/agile_tools.mp4",
+                "public_id": "agile_tools",
+                "_id": "674ff0202b93b83f87960118"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Sarah Johnson"
+    },
+    {
+        "_id": "674ff0302b93b83f87960119",
+        "title": "Data Structures and Algorithms",
+        "category": "Technology",
+        "level": "Advanced",
+        "primaryLanguage": "English",
+        "subtitle": "Master problem-solving skills",
+        "description": "Learn essential data structures and algorithms to crack coding interviews.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Data Structures and Algorithms Course!",
+        "pricing": 300,
+        "objectives": "Solve complex coding problems efficiently.",
+        "curriculum": [
+            {
+                "title": "Introduction to Algorithms",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/algorithms_intro.mp4",
+                "public_id": "algorithms_intro",
+                "_id": "674ff0302b93b83f87960120"
+            },
+            {
+                "title": "Arrays and Strings",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/arrays_strings.mp4",
+                "public_id": "arrays_strings",
+                "_id": "674ff0302b93b83f87960121"
+            },
+            {
+                "title": "Linked Lists",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/linked_lists.mp4",
+                "public_id": "linked_lists",
+                "_id": "674ff0302b93b83f87960122"
+            },
+            {
+                "title": "Sorting and Searching",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/sorting_searching.mp4",
+                "public_id": "sorting_searching",
+                "_id": "674ff0302b93b83f87960123"
+            },
+            {
+                "title": "Dynamic Programming",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/dynamic_programming.mp4",
+                "public_id": "dynamic_programming",
+                "_id": "674ff0302b93b83f87960124"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Chris Evans"
+    },
+    {
+        "_id": "674ff0402b93b83f87960125",
+        "title": "Cybersecurity Fundamentals",
+        "category": "Technology",
+        "level": "Beginner",
+        "primaryLanguage": "English",
+        "subtitle": "Protect systems and data",
+        "description": "A beginner's guide to understanding cybersecurity principles.",
+        "image": "http://res.cloudinary.com/doibocmzz/image/upload/v1733270810/j932bfxa0kcrynbabdlf.webp",
+        "welcomeMessage": "Welcome to the Cybersecurity Fundamentals Course!",
+        "pricing": 200,
+        "objectives": "Implement basic cybersecurity measures.",
+        "curriculum": [
+            {
+                "title": "Introduction to Cybersecurity",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cyber_intro.mp4",
+                "public_id": "cyber_intro",
+                "_id": "674ff0402b93b83f87960126"
+            },
+            {
+                "title": "Understanding Network Security",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/network_security.mp4",
+                "public_id": "network_security",
+                "_id": "674ff0402b93b83f87960127"
+            },
+            {
+                "title": "Encryption Techniques",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/encryption_techniques.mp4",
+                "public_id": "encryption_techniques",
+                "_id": "674ff0402b93b83f87960128"
+            },
+            {
+                "title": "Cybersecurity Tools",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cyber_tools.mp4",
+                "public_id": "cyber_tools",
+                "_id": "674ff0402b93b83f87960129"
+            },
+            {
+                "title": "Securing Web Applications",
+                "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/web_security.mp4",
+                "public_id": "web_security",
+                "_id": "674ff0402b93b83f87960130"
+            }
+        ],
+        "students": [],
+        "__v": 0,
+        "revenue": "$0",
+        "instructorName": "Alex Wilson"
+    }
+]

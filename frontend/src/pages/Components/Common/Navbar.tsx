@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { label: "Home", src: "/" },
     { label: "About", src: "/about" },
-    { label: "Courses", src: "/courses" },
+    { label: "Courses", src: "/all-courses" },
     { label: "Pages", src: "/pages" },
     { label: "Blog", src: "/blog" },
     { label: "Contacts", src: "/contacts" },
@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
             <DropdownMenuTrigger>
               <button className="flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-lg text-white hover:bg-gray-700">
                 <FiUser size={20} />
-                <span>{userName}</span>
+                <span className="capitalize">{userName}</span>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-gray-700 border-0 text-white shadow-lg rounded-md p-2">
