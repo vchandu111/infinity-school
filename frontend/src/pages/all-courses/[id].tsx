@@ -7,6 +7,7 @@ import {
   FaTag,
   FaHeart,
   FaClock,
+  FaCheck,
 } from "react-icons/fa";
 
 const CourseDetails: React.FC = () => {
@@ -78,10 +79,20 @@ const CourseDetails: React.FC = () => {
               </div>
             </div>
             {/* What You'll Learn */}
-            <h2 className="text-xl font-semibold mb-4 mt-10 text-orange-500">
-              What You'll Learn
-            </h2>
-            <p>{course.objectives}</p>
+            <div className="bg-gray-800 px-4 py-4 mt-10 rounded-md">
+              <h2 className="text-xl font-semibold mb-4  text-orange-500">
+                What You'll Learn
+              </h2>
+              <ul className="list-none space-y-2">
+                {Array.isArray(course.objectives) &&
+                  course.objectives.map((objective: string, index: number) => (
+                    <li key={index} className="flex items-start space-x-2">
+                      <FaCheck className="text-green-500 mt-1" />
+                      <span>{objective}</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
           </div>
 
           {/* Pricing Card with Video */}
@@ -157,7 +168,22 @@ const CourseDetails: React.FC = () => {
         <h2 className="text-xl font-semibold mb-4 mt-10 text-orange-500">
           Description
         </h2>
-        <p className="text-md text-gray-400 mt-2">{course.description}</p>
+        <div
+          className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 p-6"
+          style={{
+            width: "100%", // Ensure the block takes the full container width
+            maxWidth: "100%", // Avoid exceeding container limits
+          }}
+        >
+          <p
+            className="text-md text-gray-300 leading-relaxed"
+            style={{
+              textAlign: "justify", // Justify text for a polished appearance
+            }}
+          >
+            {course.description}
+          </p>
+        </div>
       </div>
     </div>
   );

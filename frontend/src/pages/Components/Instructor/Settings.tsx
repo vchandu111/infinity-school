@@ -45,10 +45,10 @@ const Settings: React.FC<SettingsProps> = ({ settingsData, setSettingsData }) =>
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8">
+    <div className=" bg-gray-800 border border-gray-700 rounded-lg p-4 mb-4">
       {/* Upload Course Image */}
       <div className="mb-6">
-        <label htmlFor="courseImage" className="block text-gray-400 mb-2">
+        <label htmlFor="courseImage" className="block text-lg mb-6">
           Upload Course Image
         </label>
         <input
@@ -56,8 +56,8 @@ const Settings: React.FC<SettingsProps> = ({ settingsData, setSettingsData }) =>
           id="courseImage"
           accept="image/*"
           onChange={handleImageUpload}
-          className="text-gray-400 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-        />
+          className="bg-gray-900 text-white file:bg-gray-700 file:text-white file:rounded-lg file:px-4 file:py-2 file:border-none file:cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-500 mb-2"
+          />
       </div>
 
       {uploadProgress && (
