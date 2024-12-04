@@ -123,7 +123,7 @@ const ContentUploader: React.FC<{
   };
 
   return (
-    <div className=" bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8 mt-10">
+    <div className="bg-gradient-to-b from-gray-900 to-gray-800 text-white p-8 mt-10">
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={handleAddLecture}

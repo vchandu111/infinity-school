@@ -4,7 +4,7 @@ const LectureSchema = new mongoose.Schema({
   title: String,
   videoUrl: String,
   public_id: String,
-  freePreview: Boolean,
+  isFreePreview: Boolean,
 });
 
 const CourseSchema = new mongoose.Schema({

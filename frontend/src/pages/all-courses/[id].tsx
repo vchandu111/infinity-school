@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import {
   FaPlayCircle,
@@ -8,14 +8,19 @@ import {
   FaHeart,
   FaClock,
   FaCheck,
+  FaLock,
 } from "react-icons/fa";
 
 const CourseDetails: React.FC = () => {
   const router = useRouter();
-  const { id } = router.query; // Get the course ID from the route
+  const { id } = router.query;
   const [course, setCourse] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState<string | null>(null);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (id) {
@@ -28,12 +33,41 @@ const CourseDetails: React.FC = () => {
             setError("Failed to fetch course details");
           }
         })
-        .catch((err) =>
+        .catch(() =>
           setError("An error occurred while fetching course details")
         )
         .finally(() => setLoading(false));
     }
   }, [id]);
+
+  const handlePlayVideo = (videoUrl: string) => {
+    setSelectedVideoUrl(videoUrl);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedVideoUrl(null);
+    setShowPurchaseModal(false);
+  };
+
+  // Close modal on clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        handleCloseModal();
+      }
+    };
+
+    if (selectedVideoUrl || showPurchaseModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [selectedVideoUrl, showPurchaseModal]);
 
   if (loading) {
     return (
@@ -50,6 +84,10 @@ const CourseDetails: React.FC = () => {
       </div>
     );
   }
+
+  const firstFreePreview = course.curriculum.find(
+    (lecture: any) => lecture.isFreePreview
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b pt-20 from-gray-900 to-gray-800 text-white">
@@ -95,21 +133,22 @@ const CourseDetails: React.FC = () => {
             </div>
           </div>
 
-          {/* Pricing Card with Video */}
+          {/* Pricing Card with First Free Preview Video */}
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-            {/* First Video */}
-            {course.curriculum.length > 0 && (
+            {firstFreePreview ? (
               <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
                 <video
-                  src={course.curriculum[0].videoUrl}
+                  src={firstFreePreview.videoUrl}
                   controls
                   className="w-full h-full object-cover"
                 />
               </div>
+            ) : (
+              <p className="text-sm text-gray-400">
+                No free preview available.
+              </p>
             )}
-
-            {/* Pricing Section */}
-            <div className="">
+            <div>
               <p className="text-2xl font-bold text-orange-500">
                 ₹{course.pricing}{" "}
                 <span className="line-through text-gray-500">₹3,999</span>{" "}
@@ -119,9 +158,8 @@ const CourseDetails: React.FC = () => {
                 12 hours left at this price!
               </p>
               <button className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-6 rounded-lg">
-                Add to cart
+                Buy Now
               </button>
-
               <p className="text-sm text-gray-400 mt-4">
                 30-Day Money-Back Guarantee | Full Lifetime Access
               </p>
@@ -151,19 +189,69 @@ const CourseDetails: React.FC = () => {
               key={lecture._id}
               className="flex items-center space-x-4 bg-gray-800 p-4 rounded-lg shadow-md"
             >
-              <FaPlayCircle className="text-green-500 text-2xl cursor-pointer" />
+              {lecture.isFreePreview ? (
+                <FaPlayCircle
+                  className="text-green-500 text-2xl cursor-pointer"
+                  onClick={() => handlePlayVideo(lecture.videoUrl)}
+                />
+              ) : (
+                <FaLock
+                  className="text-gray-500 text-2xl cursor-pointer"
+                  onClick={() => setShowPurchaseModal(true)}
+                />
+              )}
               <div>
                 <h3 className="text-lg font-semibold">{`Lecture ${index + 1}: ${
                   lecture.title
                 }`}</h3>
-                <p className="text-sm text-gray-400">
-                  Click the play icon to watch.
-                </p>
+                {!lecture.isFreePreview && (
+                  <p className="text-sm text-gray-400">
+                    Purchase course to unlock.
+                  </p>
+                )}
               </div>
             </li>
           ))}
         </ul>
       </div>
+
+      {/* Video Modal */}
+      {selectedVideoUrl && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div
+            ref={modalRef}
+            className="bg-gray-900 rounded-lg p-4 w-full max-w-2xl"
+          >
+            <button
+              onClick={handleCloseModal}
+              className="text-white text-2xl absolute top-4 right-4"
+            >
+              ✖
+            </button>
+            <video src={selectedVideoUrl} controls className="w-full h-full" />
+          </div>
+        </div>
+      )}
+
+      {/* Purchase Modal */}
+      {showPurchaseModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div
+            ref={modalRef}
+            className="bg-gray-900 rounded-lg p-4 w-full max-w-md text-center"
+          >
+            <h3 className="text-lg font-bold text-white mb-4">
+              Purchase the course to unlock this lecture.
+            </h3>
+            <button
+              onClick={handleCloseModal}
+              className="px-6 py-2 bg-orange-600 text-white rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-xl font-semibold mb-4 mt-10 text-orange-500">
           Description

@@ -21,7 +21,8 @@
         "title": "Introduction to HTML",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
         "public_id": "yyrsqwfxuytfjzubck8m",
-        "_id": "674ee4382b93b83f879600f4"
+        "_id": "674ee4382b93b83f879600f4",
+        "isFreePreview":true
       }
     ],
     "students": [],
@@ -51,7 +52,8 @@
         "title": "Getting Started with React",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
         "public_id": "yyrsqwfxuytfjzubck8m",
-        "_id": "674ee56e2b93b83f879600f7"
+        "_id": "674ee56e2b93b83f879600f7",
+        "isFreePreview":true
       }
     ],
     "students": [],
@@ -81,7 +83,8 @@
         "title": "Node.js Basics",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
         "public_id": "yyrsqwfxuytfjzubck8m",
-        "_id": "674ee8502b93b83f879600fa"
+        "_id": "674ee8502b93b83f879600fa",
+        "isFreePreview":true
       }
     ],
     "students": [],
@@ -111,7 +114,8 @@
         "title": "What is Generative AI?",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/yyrsqwfxuytfjzubck8m.mp4",
         "public_id": "yyrsqwfxuytfjzubck8m",
-        "_id": "674f9d1e065060a46096c9d2"
+        "_id": "674f9d1e065060a46096c9d2",
+        "isFreePreview":true
       }
     ],
     "students": [],
@@ -141,31 +145,36 @@
         "title": "Introduction to DevOps",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/devops_intro.mp4",
         "public_id": "devops_intro",
-        "_id": "674ff0012b93b83f87960102"
+        "_id": "674ff0012b93b83f87960102",
+        "isFreePreview":true
       },
       {
         "title": "Version Control with Git",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/git_version_control.mp4",
         "public_id": "git_version_control",
-        "_id": "674ff0012b93b83f87960103"
+        "_id": "674ff0012b93b83f87960103",
+        "isFreePreview":false
       },
       {
         "title": "Continuous Integration (CI)",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/ci_pipelines.mp4",
         "public_id": "ci_pipelines",
-        "_id": "674ff0012b93b83f87960104"
+        "_id": "674ff0012b93b83f87960104",
+        "isFreePreview":false
       },
       {
         "title": "Continuous Delivery (CD)",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cd_pipelines.mp4",
         "public_id": "cd_pipelines",
-        "_id": "674ff0012b93b83f87960105"
+        "_id": "674ff0012b93b83f87960105",
+        "isFreePreview":false
       },
       {
         "title": "Monitoring and Logging",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/logging_monitoring.mp4",
         "public_id": "logging_monitoring",
-        "_id": "674ff0012b93b83f87960106"
+        "_id": "674ff0012b93b83f87960106",
+        "isFreePreview":false
       }
     ],
     "students": [],
@@ -195,31 +204,36 @@
         "title": "Introduction to Cloud Computing",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cloud_intro.mp4",
         "public_id": "cloud_intro",
-        "_id": "674ff0102b93b83f87960108"
+        "_id": "674ff0102b93b83f87960108",
+        "isFreePreview":true
       },
       {
         "title": "AWS EC2 Basics",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_ec2_basics.mp4",
         "public_id": "aws_ec2_basics",
-        "_id": "674ff0102b93b83f87960109"
+        "_id": "674ff0102b93b83f87960109",
+        "isFreePreview":false
       },
       {
         "title": "AWS S3 for Storage",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_s3_storage.mp4",
         "public_id": "aws_s3_storage",
-        "_id": "674ff0102b93b83f87960110"
+        "_id": "674ff0102b93b83f87960110",
+        "isFreePreview":false
       },
       {
         "title": "Elastic Load Balancing",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_elb.mp4",
         "public_id": "aws_elb",
-        "_id": "674ff0102b93b83f87960111"
+        "_id": "674ff0102b93b83f87960111",
+        "isFreePreview":false
       },
       {
         "title": "AWS Lambda Functions",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/aws_lambda.mp4",
         "public_id": "aws_lambda",
-        "_id": "674ff0102b93b83f87960112"
+        "_id": "674ff0102b93b83f87960112",
+        "isFreePreview":false
       }
     ],
     "students": [],
@@ -249,31 +263,36 @@
         "title": "Introduction to Agile",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/agile_intro.mp4",
         "public_id": "agile_intro",
-        "_id": "674ff0202b93b83f87960114"
+        "_id": "674ff0202b93b83f87960114",
+        "isFreePreview":true
       },
       {
         "title": "Scrum Basics",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/scrum_basics.mp4",
         "public_id": "scrum_basics",
-        "_id": "674ff0202b93b83f87960115"
+        "_id": "674ff0202b93b83f87960115",
+        "isFreePreview":true
       },
       {
         "title": "Kanban for Workflow",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/kanban_workflow.mp4",
         "public_id": "kanban_workflow",
-        "_id": "674ff0202b93b83f87960116"
+        "_id": "674ff0202b93b83f87960116",
+        "isFreePreview":true
       },
       {
         "title": "Agile Planning and Estimation",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/agile_planning.mp4",
         "public_id": "agile_planning",
-        "_id": "674ff0202b93b83f87960117"
+        "_id": "674ff0202b93b83f87960117",
+        "isFreePreview":true
       },
       {
         "title": "Agile Tools Overview",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/agile_tools.mp4",
         "public_id": "agile_tools",
-        "_id": "674ff0202b93b83f87960118"
+        "_id": "674ff0202b93b83f87960118",
+        "isFreePreview":true
       }
     ],
     "students": [],
@@ -303,31 +322,36 @@
         "title": "Introduction to Algorithms",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/algorithms_intro.mp4",
         "public_id": "algorithms_intro",
-        "_id": "674ff0302b93b83f87960120"
+        "_id": "674ff0302b93b83f87960120",
+        "isFreePreview":true
       },
       {
         "title": "Arrays and Strings",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/arrays_strings.mp4",
         "public_id": "arrays_strings",
-        "_id": "674ff0302b93b83f87960121"
+        "_id": "674ff0302b93b83f87960121",
+        "isFreePreview":false
       },
       {
         "title": "Linked Lists",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/linked_lists.mp4",
         "public_id": "linked_lists",
-        "_id": "674ff0302b93b83f87960122"
+        "_id": "674ff0302b93b83f87960122",
+        "isFreePreview":true
       },
       {
         "title": "Sorting and Searching",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/sorting_searching.mp4",
         "public_id": "sorting_searching",
-        "_id": "674ff0302b93b83f87960123"
+        "_id": "674ff0302b93b83f87960123",
+        "isFreePreview":true
       },
       {
         "title": "Dynamic Programming",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/dynamic_programming.mp4",
         "public_id": "dynamic_programming",
-        "_id": "674ff0302b93b83f87960124"
+        "_id": "674ff0302b93b83f87960124",
+        "isFreePreview":true
       }
     ],
     "students": [],
@@ -357,31 +381,36 @@
         "title": "Introduction to Cybersecurity",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cyber_intro.mp4",
         "public_id": "cyber_intro",
-        "_id": "674ff0402b93b83f87960126"
+        "_id": "674ff0402b93b83f87960126",
+        "isFreePreview":true
       },
       {
         "title": "Understanding Network Security",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/network_security.mp4",
         "public_id": "network_security",
-        "_id": "674ff0402b93b83f87960127"
+        "_id": "674ff0402b93b83f87960127",
+        "isFreePreview":true
       },
       {
         "title": "Encryption Techniques",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/encryption_techniques.mp4",
         "public_id": "encryption_techniques",
-        "_id": "674ff0402b93b83f87960128"
+        "_id": "674ff0402b93b83f87960128",
+        "isFreePreview":true
       },
       {
         "title": "Cybersecurity Tools",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/cyber_tools.mp4",
         "public_id": "cyber_tools",
-        "_id": "674ff0402b93b83f87960129"
+        "_id": "674ff0402b93b83f87960129",
+        "isFreePreview":true
       },
       {
         "title": "Securing Web Applications",
         "videoUrl": "http://res.cloudinary.com/doibocmzz/video/upload/v1733223391/web_security.mp4",
         "public_id": "web_security",
-        "_id": "674ff0402b93b83f87960130"
+        "_id": "674ff0402b93b83f87960130",
+        "isFreePreview":true
       }
     ],
     "students": [],
