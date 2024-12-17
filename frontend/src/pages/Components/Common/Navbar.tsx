@@ -26,9 +26,8 @@ const Navbar: React.FC = () => {
     { label: "Home", src: "/" },
     { label: "About", src: "/about" },
     { label: "Courses", src: "/all-courses" },
-    { label: "Pages", src: "/pages" },
-    { label: "Blog", src: "/blog" },
-    { label: "Contacts", src: "/contacts" },
+    // { label: "Blog", src: "/blog" },
+    // { label: "Contacts", src: "/contacts" },
   ];
 
   useEffect(() => {
@@ -68,23 +67,23 @@ const Navbar: React.FC = () => {
           <DropdownMenu>
             <DropdownMenuTrigger>
               <button className="flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-lg text-white hover:bg-gray-700">
-                <FiUser size={20} />
+                <FiUser size={20} className="text-orange-500"/>
                 <span className="capitalize">{userName}</span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-gray-700 border-0 text-white shadow-lg rounded-md p-2">
+            <DropdownMenuContent className="bg-gray-700 border-0 text-white shadow-lg rounded-md p-2 cursor-pointer">
               <DropdownMenuItem
                 className="hover:bg-gray-600 flex items-center space-x-2"
                 onClick={() => router.push("/instructor")}
               >
-                <MdOutlineSchool size={20} />
+                <MdOutlineSchool size={20} className="text-orange-500"/>
                 <span>Instructor View</span>
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="hover:bg-gray-600 flex items-center space-x-2"
-                onClick={() => alert("Go to My Profile")}
+                onClick={() => router.push("/profile")}
               >
-                <AiOutlineProfile size={20} />
+                <AiOutlineProfile size={20} className="text-orange-500" />
                 <span>My Profile</span>
               </DropdownMenuItem>
               <DropdownMenuItem

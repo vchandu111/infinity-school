@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 // Define a type for the API response
 interface LoginResponse {
@@ -22,6 +23,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -39,7 +41,10 @@ const Login: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", requestOptions);
+      const response = await fetch(
+        "http://localhost:3000/auth/login",
+        requestOptions
+      );
       const data: LoginResponse = await response.json();
 
       if (response.ok) {
@@ -52,9 +57,12 @@ const Login: React.FC = () => {
           localStorage.setItem("userEmail", data.data.user.userEmail);
 
           console.log("User logged in:", data.data.user);
+          router.push("/");
         }
       } else {
-        toast.error(data.message || "Login failed. Please check your credentials.");
+        toast.error(
+          data.message || "Login failed. Please check your credentials."
+        );
       }
     } catch (error) {
       console.error("Error during login:", error);
@@ -66,6 +74,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">
+      <ToastContainer />
       {/* Left Side Image Panel */}
       <div className="hidden lg:flex w-3/4  items-center justify-center p-12">
         <Image src="/login.svg" alt="login" width={700} height={700} />
